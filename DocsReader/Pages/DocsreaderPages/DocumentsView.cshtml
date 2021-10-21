@@ -1,0 +1,54 @@
+﻿@page
+@model DocsReader.Pages.DocsreaderPages.DocumentsViewModel
+
+
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-9">
+        <h2 class="text-info">Project List</h2>
+    </div>
+
+
+    <div class="col-12 border p-3 mt-3">
+        <form method="post">
+            @if (Model.Documents.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Documents.FirstOrDefault().Name"></label>
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(m=>m.Books.FirstOrDefault().Author)*@
+                            <label asp-for="Documents.FirstOrDefault().Format"></label>
+                        </th>
+                        <th>
+                            <label asp-for="Documents.FirstOrDefault().DocumentStoreType"></label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Documents)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Format)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.DocumentStoreType)
+                            </td>
+                            <td>
+                                <a asp-page="Index" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">View</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No Projects available.</p>
+            }
+        </form>
+    </div>
+</div>
